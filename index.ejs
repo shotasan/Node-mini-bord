@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>ミニ掲示板</title>
+  <link rel="stylesheet" href="./style.css">
+  <script>
+    function init() {
+      // ローカルストレージからキー（id）を指定して値を取り出す
+      var id = localStorage.getItem("id");
+      // 値が未登録の場合にログイン画面に遷移する
+      // 現在開いているページはlocationオブジェクトのhrefプロパティに設定されているので上書きする
+      if (id == null) {
+        location.href = "./login";
+      }
+      // spanタグにid値を表示
+      document.querySelector("#id").textContent = "ID: " + id;
+      // サーバーに送るID値を設定する処理
+      document.querySelector("#id_input").value = id;
+    }
+  </script>
+</head>
+
+<!-- ページ読み込み完了時の処理 -->
+
+<body onload="init();">
+
+  <head>
+    <h1>掲示板</h1>
+  </head>
+  <div role="main">
+    <p>メッセージは最大10個まで保管されます</p>
+    <form action="/" method="POST">
+      <p><span id="id"></span>
+        <!-- サーバーにID値を送るための処理 -->
+        <input type="hidden" id="id_input" name="id" value=""></p>
+      <p><input type="text" name="msg">
+        <input type="submit" value="送信"></p>
+    </form>
+    <hr>
+    <p>
+      <table style="width: 85%;">
+        <% for(var i in data) { %>
+        <%- include("data_item", {val: data[i]}) %>
+        <% } %>
+      </table>
+    </p>
+  </div>
+
+</body>
+
+</html>

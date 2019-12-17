@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Login</title>
+  <link rel="stylesheet" href="./style.css">
+  <script>
+    function setId() {
+      var id = document.querySelector("#id_input").value;
+      localStorage.setItem("id", id);
+      location.href = "/"
+    }
+  </script>
+</head>
+
+<body>
+
+  <head>
+    <h1>LOGIN</h1>
+  </head>
+  <div role="mail">
+    <p>あなたのログインネームを入力ください</p>
+    <p><input type="text" id="id_input">
+      <button onclick="setId();">送信</button></p>
+  </div>
+
+</body>
+
+</html>
